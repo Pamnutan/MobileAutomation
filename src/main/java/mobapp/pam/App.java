@@ -22,18 +22,16 @@ import org.testng.annotations.Test;
  */
 public class App 
 {
-	public WebDriver driver;
-	HashMap propertyData;
-	/***
-	 * To initialize the android mob app capabilities
-	 * PlatformName, DeviceName, App
-	 * 
-	 */
+	public WebDriver driver; //To maintain single webdrive instance
+	HashMap propertyData; //To store the data values
 	
+	/***
+	 * To initialize the android mobile app capabilities
+	 * PlatformName, DeviceName, App etc.
+	 */
 	@BeforeTest
-	public void testSetup()
-	{
-		
+	public void setup()
+	{		
 		System.out.println("Device capabilty setting started...");
 		try {
 			
@@ -43,6 +41,8 @@ public class App
 			DesiredCapabilities capabilities = new DesiredCapabilities();
 			capabilities.setCapability("platformName", propertyData.get("Platform_Name"));
 			capabilities.setCapability("deviceName", propertyData.get("Device_Name"));
+			capabilities.setCapability("appPackage", propertyData.get("appPackage"));
+			capabilities.setCapability("appActivity",propertyData.get("appActivity"));
 			capabilities.setCapability("newCommandTimeout", propertyData.get("New_Command_Timeout"));
 			capabilities.setCapability("app", app.getAbsolutePath());
 			driver = new RemoteWebDriver(new URL(propertyData.get("Hub_Url").toString()), capabilities);
@@ -85,8 +85,12 @@ public class App
     	System.out.println("Item Selected.");
 
     	CommonUtility.click(driver, "id", propertyData.get("buyitnow").toString());
-    	CommonUtility.click(driver, "id", propertyData.get("selectsize").toString());
-    	System.out.println("Item size Selected.");
+    	
+    	WebElement parentElement1 = driver.findElement(By.id("size"));
+		WebElement childElement1 = parentElement1.findElement(By.xpath("//android.view.View[@index='1']"));
+		childElement1.click();
+		System.out.println("First Item with index 1 is Selected.");
+		//To do: Replace this with selectFromDropdown() method 
     	
     	CommonUtility.waitForElement(driver, "id", propertyData.get("buyitnow").toString());
     	CommonUtility.click(driver, "id", propertyData.get("buyitnow").toString());

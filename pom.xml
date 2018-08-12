@@ -21,13 +21,12 @@
 			<version>6.8.7</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
 			<version>3.11.0</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 </project>

@@ -50,39 +50,32 @@ public class CommonUtility {
 		 	case "name":
 		 		element=driver.findElement(By.name(Value));
 		 		break;
-
 		 	case "xpath":
 		 		element=driver.findElement(By.xpath(Value));
 		 		break;
-
 		 	case "classname":
 		 		element=driver.findElement(By.className(Value));
 		 		break;
-
 		 	case "tagname":
 		 		element=driver.findElement(By.tagName(Value));
 		 		break;
-
 		 	case "css":
 		 		element=driver.findElement(By.cssSelector(Value));
 		 		break;
-
 		 	case "linktext":
 		 		element=driver.findElement(By.linkText(Value));
 		 		break;
-
 		 	case "parial_linktext":
 		 		element=driver.findElement(By.partialLinkText(Value));
 		 		break;
-
 		 	default:
 		 		element=null;
 		 		System.out.println("Element not found");
 		 		Assert.fail("Element not found");
 		 		break;
 		}
-			System.out.println("Element found");
-		 return element;
+		System.out.println("Element found");
+		return element;
 	 }
 
 	 /**
@@ -121,7 +114,28 @@ public class CommonUtility {
 		System.out.println("Entered value="+enterVal);
 	}
 	
+	/**
+	 * select from drop down
+	 * @param driver
+	 * @param parentLocator
+	 * @param parentValue
+	 * @param childLocator
+	 * @param childValue
+	 */
+	public static void selectFromDropdown(WebDriver driver, String parentLocator, String parentValue,String childLocator, String childValue)
+	{
+		WebElement parentElement = findElement(driver, parentLocator,parentValue);
+		WebElement childElement1 = findElement((WebDriver) parentElement, parentLocator,parentValue);
+		childElement1.click();
+	}
 	
+	
+	/***
+	 * Perform the .property file reading and store its contents in the hashmap through out the execution
+	 * 
+	 * @param filename : file path to read
+	 * @return - file data hash ma
+	 */
 	public static HashMap<String, String> readPropertyFile(String filename) {
 		HashMap<String, String> config = new HashMap<>();
 		try {
