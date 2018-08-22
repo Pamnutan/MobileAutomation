@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -25,6 +26,7 @@ public class CommonUtility {
 	 * @param locator - type of locator
 	 * @param value - locator value
 	 */
+		
 	 public static void waitForElement(WebDriver driver, String locator, String value)
 	    {
 	    	WebDriverWait wait = new WebDriverWait(driver, 60);
@@ -161,5 +163,39 @@ public class CommonUtility {
 		return config;
 	}
 	
+	/**
+	 * perform scroll to fuctionality on app
+	 * @param driver android or ios driver
+	 * @param locator locator type
+	 * @param locatorValue locator value
+	 */
+	public static void scroll(WebDriver driver, String locator, String locatorValue)
+	{
+		TouchActions action=new TouchActions(driver);
+		action.scroll(findElement(driver, locator, locatorValue), 0, 10);		
+	}
 	
+	/**
+	 * perform single tap operation on app
+	 * @param driver android or ios driver
+	 * @param locator locator type
+	 * @param locatorValue locator value
+	 */
+	public static void singleTap(WebDriver driver, String locator, String locatorValue)
+	{
+		TouchActions action=new TouchActions(driver);
+		action.singleTap(findElement(driver, locator, locatorValue));		
+	}
+	
+	/**
+	 * perform flip operation on app
+	 * @param driver android or ios driver
+	 * @param locator locator type
+	 * @param locatorValue locator value
+	 */
+	public static void flip(WebDriver driver, String locator, String locatorValue)
+	{
+		TouchActions action=new TouchActions(driver);
+		action.flick(findElement(driver, locator, locatorValue), 0, 10, 10);		
+	}
 }
